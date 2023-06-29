@@ -1,0 +1,42 @@
+//Turn on LED connected to GPIOB pin0
+unsigned int a;
+
+// Enable clock for GPIOB RCC_APB2ENR
+
+// Port direction GPIOB_CRL
+
+#define 	RCC_APB2ENR 	(int *)		(0x40021000+0x18) //clock enable
+#define 	GPIOB_CRL			(int *)		(0x40010C00+0x00) //gpio as output	
+#define 	GPIOB_ODR			(int *)		(0x40010C00+0x0C)	//data write (1)
+
+
+							
+// Write data 1 to GPIOB Pin0/Bit0
+
+
+
+void delay (void)  {
+  int  d;
+
+  for (d = 0; d < 2000000; d++);             /* only to delay for LED flashes */
+}
+
+
+int main(void)
+{
+
+		*RCC_APB2ENR|=0x08;
+		*GPIOB_CRL|=0x01;
+	
+	
+	while(1)
+	{
+			
+a++;
+*GPIOB_ODR|=0x01;
+delay();
+*GPIOB_ODR=0x00;	
+delay();	
+		
+	}
+}
